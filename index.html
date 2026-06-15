@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Lovely Angels School</title>
+  <!-- Google Fonts + Font Awesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1e293b;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    :root {
+      --primary: #0f3b7a;
+      --primary-dark: #0a2c5a;
+      --secondary: #f4a261;
+      --accent: #e76f51;
+      --light-bg: #f8fafc;
+      --gray-text: #475569;
+      --border-light: #e2e8f0;
+      --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      --radius-lg: 1.5rem;
+      --radius-md: 1rem;
+    }
+
+    /* Global */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    .section-subtitle {
+      color: var(--gray-text);
+      font-size: 1.1rem;
+      margin-bottom: 48px;
+      max-width: 700px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Header & Nav */
+    header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(0px);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      flex-wrap: wrap;
+    }
+    .logo h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .logo span {
+      color: var(--secondary);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e293b;
+      transition: 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--primary);
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        padding: 20px 0;
+        gap: 20px;
+        text-align: center;
+        border-top: 1px solid var(--border-light);
+        margin-top: 16px;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .navbar {
+        padding: 16px 0;
+      }
+      section {
+        padding: 60px 0;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(105deg, #f0f9ff 0%, #e6f0fa 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-badge {
+      background: var(--secondary);
+      color: #1e293b;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #0f172a;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-bottom: 32px;
+      max-width: 550px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-image {
+      flex: 1;
+      text-align: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 32px;
+      box-shadow: var(--shadow-md);
+    }
+    @media (max-width: 800px) {
+      .hero-grid { flex-direction: column; text-align: center; }
+      .hero-content h1 { font-size: 2.3rem; }
+      .hero-buttons { justify-content: center; }
+      .hero-content p { margin-left: auto; margin-right: auto; }
+    }
+
+    /* Cards & Grids */
+    .grid-3, .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s;
+      border: 1px solid var(--border-light);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    .teacher-card {
+      text-align: center;
+    }
+    .teacher-img {
+      width: 130px;
+      height: 130px;
+      background: #eef2ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 3rem;
+      color: var(--primary);
+      overflow: hidden;
+    }
+    .teacher-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Notice & Events */
+    .notice-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .notice-board {
+      flex: 1.5;
+      background: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .events-list {
+      flex: 1;
+      background: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .notice-item, .event-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .notice-date {
+      background: var(--secondary);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .event-date {
+      font-weight: 700;
+      min-width: 70px;
+      background: #eef2ff;
+      padding: 5px 10px;
+      text-align: center;
+      border-radius: 20px;
+    }
+
+    /* Gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .gallery-item {
+      height: 220px;
+      background: #cbd5e1;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    /* contact form */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-light);
+      border-radius: 28px;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    .contact-info {
+      background: var(--light-bg);
+      padding: 32px;
+      border-radius: 28px;
+    }
+    .info-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .map {
+      margin-top: 20px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    @media (max-width: 780px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .notice-wrapper { flex-direction: column; }
+    }
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 48px 0 24px;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .social-icons a {
+      color: white;
+      background: #1e293b;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 12px;
+      transition: 0.2s;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid #2d3a4e;
+    }
+    .btn-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      z-index: 99;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+.about-image {
+  text-align: center;
+  margin: 48px 0 20px;
+}
+.about-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 28px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+}
+.about-image img:hover {
+  transform: scale(1.01);
+}
+.copyright a{
+    color:#f4a261;
+    text-decoration:none;
+    transition:all 0.3s ease;
+}
+
+.copyright a:hover{
+    color:#ffffff;
+    text-decoration:underline;
+}
+  </style>
+</head>
+<body>
+
+
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/9779812345678" class="btn-wa" target="_blank">
+  <i class="fab fa-whatsapp"></i> Admission Enquiry
+</a>
+
+
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <h1>Lovely<span>Angels</span> School</h1>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#academics">Academics</a></li>
+        <li><a href="#facilities">Facilities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+
+
+<main>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><i class="fas fa-chalkboard-user"></i> Admission Open 2083</div>
+
+
+          <h1>Shaping Future Leaders <br> With Excellence</h1>
+        <p>Lovely Angesl School – Where Knowledge meets character. Modern pedagogy, values, and holistic development from Montessori to Grade 10.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Enquire Now</a>
+          <a href="#about" class="btn btn-outline"><i class="fas fa-info-circle"></i> Learn More</a>
+        </div>
+      </div>
+
+
+<div class="hero-image">
+      <img src="hero1.jpg" alt="School building">
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- About Section -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Our School</h2>
+    <p class="section-subtitle">Since 2053, Lovely Angels School has been a benchmark for quality education in Nepal, fostering academic brilliance and ethical values.</p>
+
+    <!-- Three cards grid -->
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-eye"></i></div>
+        <h3>Our Vision</h3>
+        <p>To be a global standard institution that nurtures creative, confident, and compassionate world citizens.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+        <h3>Our Mission</h3>
+        <p>Empower students with 21st-century skills, moral integrity, and academic excellence through innovative learning.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
+        <h3>Core Values</h3>
+        <p>Respect, Integrity, Excellence, Innovation, and Community Service — pillars of our daily practice.</p>
+      </div>
+    </div>
+
+    <!-- One Photo (place your image file here) -->
+    <div class="about-image">
+      <img src="hero.jpg" alt="Lovely Angels School Campus">
+    </div>
+
+    <!-- Quote & Principal’s Message -->
+    <div style="margin-top: 48px; text-align: center;">
+      <div class="quote" style="background: var(--light-bg); padding: 32px; border-radius: 32px;">
+        <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--secondary); opacity: 0.5;"></i>
+        <p style="font-size: 1.2rem; font-style: italic; max-width: 800px; margin: 16px auto;">"Education is the most powerful weapon which you can use to change the world." – Nelson Mandela</p>
+        <p><strong>Principal’s Message:</strong> “At Lovely Angels, we focus on every child's potential and craft an environment where curiosity thrives.” – Mr. Manoj Regmi</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+  <!-- Academics Section -->
+  <section id="academics" style="background: var(--light-bg);">
+    <div class="container">
+      <h2 class="section-title">Academic Optional Subjects</h2>
+      <p class="section-subtitle">Comprehensive curriculum with modern teaching methodologies to unlock every student’s potential.</p>
+      <div class="grid-3">
+        <div class="card">
+          <i class="fas fa-flask card-icon"></i>
+          <h3>Opt.Maths [I]</h3>
+          <p>Mathematics – state-of-the-art labs and research-oriented projects.</p>
+        </div>
+
+
+        <div class="card">
+          <i class="fas fa-chart-line card-icon"></i>
+          <h3>Economics [I] </h3>
+          <p>Economics with entrepreneurial skill development.</p>
+        </div>
+
+	
+	<div class="card">
+          <i class="fas fa-chart-line card-icon"></i>
+          <h3>Accountancy [II] </h3>
+          <p>Accountancy with entrepreneurial skill development.</p>
+        </div>
+
+        <div class="card">
+          <i class="fas fa-laptop-code card-icon"></i>
+          <h3>Computer [II] </h3>
+          <p>Coding, AI fundamentals, and digital literacy from early grades to Grade 12.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+ <!-- Facilities Section -->
+<section id="facilities">
+  <div class="container">
+    <h2 class="section-title">World-Class Facilities</h2>
+    <p class="section-subtitle">
+      We provide modern facilities and a supportive learning environment designed to enhance academic achievement, creativity, innovation, and overall student development.
+    </p>
+
+    <div class="grid-4">
+      <div class="card">
+        <i class="fas fa-laptop card-icon"></i>
+        <h3>Smart Classrooms</h3>
+        <p>Technology-enabled classrooms with interactive displays and digital learning resources.</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-flask card-icon"></i>
+        <h3>Science Labs</h3>
+        <p>Well-equipped Physics, Chemistry, and Biology laboratories for practical learning.</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-desktop card-icon"></i>
+        <h3>Computer Labs</h3>
+        <p>Modern computer laboratories supporting coding, AI, and digital literacy skills.</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-book-open card-icon"></i>
+        <h3>Smart Library</h3>
+        <p>Extensive collection of books, journals, and digital learning resources.</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-futbol card-icon"></i>
+        <h3>Sports Complex</h3>
+        <p>Facilities for football, volleyball, basketball, indoor games, and yoga activities.</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-bus card-icon"></i>
+        <h3>Transportation</h3>
+        <p>Reliable and safe transportation services covering nearby areas.</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-shield-alt card-icon"></i>
+        <h3>24/7 Security</h3>
+        <p>Secure school with CCTV surveillance and trained security personnel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+  <!-- Notice & Events Section (Together) -->
+  <section style="background: var(--light-bg);">
+    <div class="container">
+      <h2 class="section-title">Updates & Events</h2>
+      <p class="section-subtitle">Stay informed with latest happenings and upcoming activities.</p>
+      <div class="notice-wrapper">
+        <div class="notice-board">
+          <h3><i class="fas fa-bullhorn"></i> Notice Board</h3>
+          <div class="notice-item"><span class="notice-date">New</span><span>📢 Admission Open for Grade PG to Nine (2083 Batch) – Limited Seats!</span></div>
+          <div class="notice-item"><span class="notice-date">12 Aug</span><span>📢 Dashain Vacation from 10th October to 20th October.</span></div>
+          <div class="notice-item"><span class="notice-date">05 Aug</span><span>📢 Parent-Teacher Meeting on 25th August (9 AM to 2 PM).</span></div>
+          <div class="notice-item"><span class="notice-date">30 Jul</span><span>📢 Scholarship Examination for deserving students – 5th Sept.</span></div>
+        </div>
+
+
+
+
+        <div class="events-list">
+          <h3><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
+          <div class="event-item"><div class="event-date">Sept 15</div><div><strong>Science Exhibition</strong> – Inter-school competition</div></div>
+          <div class="event-item"><div class="event-date">Sept 28</div><div><strong>Annual Sports Day</strong> – All houses participate</div></div>
+          <div class="event-item"><div class="event-date">Oct 5</div><div><strong>Navami Cultural Program</strong> – Students showcase talents</div></div>
+          <div class="event-item"><div class="event-date">Nov 12</div><div><strong>Educational Tour</strong> – Pokhara (Grades 9 & 10)</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+ <!-- Our Teachers Section -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Our Academic Team</h2>
+    <p class="section-subtitle">Experienced & dedicated mentors shaping young minds with care and expertise.</p>
+    <div class="grid-3">
+
+      <!-- Teacher 1 – using GitHub raw image -->
+      <div class="card teacher-card">
+        <div class="teacher-img">
+          <img src="https://raw.githubusercontent.com/your-username/your-repo/main/images/manoj-regmi.jpg" alt="Mr. Manoj Regmi">
+        </div>
+        <h3>Mr. Manoj Regmi</h3>
+        <p>Principal <br>M.Ed in English | 15+ years</p> 
+        <i class="fas fa-star" style="color: #f4a261;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+      </div>
+
+
+
+    
+      <div class="card teacher-card">
+        <div class="teacher-img">
+          <img src="https://raw.githubusercontent.com/your-username/your-repo/main/images/anjali-sharma.jpg" alt="Mrs. Anjali Sharma">
+        </div>
+        <h3>Mr. Indra Prasad Adhikari</h3>
+        <p>Nepali Literature </p>
+        <i class="fas fa-star" style="color: #f4a261;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+
+
+     
+      <div class="card teacher-card">
+        <div class="teacher-img">
+          <img src="https://raw.githubusercontent.com/your-username/your-repo/main/images/binod-rijal.jpg" alt="Mr. Binod Rijal">
+        </div>
+        <h3>Mr. Amitsen Khawas</h3>
+        <p>M.Ed in English </p>
+        <i class="fas fa-star" style="color: #f4a261;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+  <!-- Gallery Section -->
+  <section id="gallery" style="background: var(--light-bg);">
+    <div class="container">
+      <h2 class="section-title">Photo Gallery</h2>
+      <p class="section-subtitle">Glimpses of campus life, events, and memorable moments.</p>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="https://picsum.photos/id/20/400/300" alt="Library"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/id/30/400/300" alt="Sports day"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/id/42/400/300" alt="Classroom"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/id/26/400/300" alt="Cultural event"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/id/88/400/300" alt="Lab activity"></div>
+        <div class="gallery-item"><img src="https://picsum.photos/id/15/400/300" alt="School tour"></div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- Contact Section + Map -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Have any queries? Fill the form or reach us directly. We’d love to hear from you.</p>
+      <div class="contact-grid">
+        <div class="contact-form">
+          <form id="schoolContactForm">
+            <input type="text" placeholder="Full Name" id="fullname" required>
+            <input type="email" placeholder="Email Address" id="emailid" required>
+            <input type="tel" placeholder="Phone Number" id="phone">
+            <textarea rows="4" placeholder="Your Message / Admission Query" id="message"></textarea>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
+          </form>
+        </div>
+
+
+
+
+
+        <div class="contact-info">
+          <div class="info-item"><i class="fas fa-map-marker-alt" style="font-size: 1.8rem;"></i><span>Sundarharaincha-2, Morang</span></div>
+          <div class="info-item"><i class="fas fa-phone-alt"></i><span>+977 9809323345</span></div>
+          <div class="info-item"><i class="fas fa-envelope"></i><span>info@lovelyangelsschool.edu.np</span></div>
+          <div class="info-item"><i class="fas fa-clock"></i><span>Mon - Fri: 9:30 AM – 4:00 PM </span></div>
+          <div class="map">
+           <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56592.23697181523!2d87.3378035!3d26.6288072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef6e553ea4e21f%3A0x908c4f0d19804afd!2sLovely%20Angels%20English%20School!5e0!3m2!1sen!2snp!4v1748500000000!5m1!1e1"
+  width="100%"
+  height="450"
+  style="border:0;"
+  allowfullscreen=""
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div>
+        <h3 style="color: white;">Lovely Angels English Boarding School</h3>
+        <p>"Education is the light through which each individuals is guided"</p>
+      </div>
+
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul style="list-style: none; margin-top: 8px;">
+          <li><a href="#about" style="color:#cbd5e1; text-decoration:none;">About Us</a></li>
+          <li><a href="#academics" style="color:#cbd5e1; text-decoration:none;">Academics</a></li>
+          <li><a href="#contact" style="color:#cbd5e1; text-decoration:none;">Admission</a></li>
+        </ul>
+      </div>
+
+
+
+      <div class="social-icons">
+        <h4>Follow Us</h4>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+
+  <div class="copyright">
+  <p>
+    &copy; 2026 Lovely Angels School. All Rights Reserved. |
+    Developed
+    <i class="fas fa-heart" style="color:#f4a261;"></i>
+    by
+    <a href="https://baburamphuyal.com.np" target="_blank" rel="noopener noreferrer"
+       style="color:#f4a261; text-decoration:none; font-weight:600;">
+       Brp Mailo
+    </a>
+  </p>
+</div>
+
+
+
+
+
+
+
+
+<script>
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Close menu when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // Contact form submission alert
+  const contactForm = document.getElementById('schoolContactForm');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('emailid').value.trim();
+    if(name === "" || email === "") {
+      alert("कृपया नाम र इमेल भर्नुहोस् | Please fill name and email.");
+      return;
+    }
+    alert(`धन्यवाद ${name}! हामी चाँडै सम्पर्क गर्नेछौं।\nThank you! Our admission team will reach out within 24 hours.`);
+    contactForm.reset();
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if(href === "#" || href === "") return;
+      const target = document.querySelector(href);
+      if(target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
