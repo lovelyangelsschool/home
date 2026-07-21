@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Lovely Angels School</title>
-  <!-- Google Fonts + Font Awesome 6 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -38,7 +37,6 @@
       --radius-md: 1rem;
     }
 
-    /* Global */
     .container {
       max-width: 1280px;
       margin: 0 auto;
@@ -113,7 +111,6 @@
       color: white;
     }
 
-    /* Header & Nav */
     header {
       background: white;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -187,7 +184,6 @@
       }
     }
 
-    /* Hero */
     .hero {
       background: linear-gradient(105deg, #f0f9ff 0%, #e6f0fa 100%);
       position: relative;
@@ -246,7 +242,6 @@
       .hero-content p { margin-left: auto; margin-right: auto; }
     }
 
-    /* Cards & Grids */
     .grid-3, .grid-4 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -276,6 +271,11 @@
     }
     .teacher-card {
       text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .teacher-card:hover {
+      transform: translateY(-8px) scale(1.01);
     }
     .teacher-img {
       width: 130px;
@@ -295,8 +295,164 @@
       height: 100%;
       object-fit: cover;
     }
+    .teacher-card .click-hint {
+      font-size: 0.75rem;
+      color: var(--gray-text);
+      margin-top: 8px;
+      opacity: 0.7;
+    }
 
-    /* Notice & Events */
+    /* ----- TEACHER GRID ANIMATION (left-to-right slide) ----- */
+    .teacher-grid-wrapper {
+      overflow: hidden;
+      width: 100%;
+    }
+    .teacher-grid-track {
+      display: flex;
+      gap: 30px;
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+    .teacher-grid-track .card {
+      flex: 0 0 calc(33.333% - 20px);
+      min-width: 260px;
+      box-sizing: border-box;
+    }
+    @media (max-width: 900px) {
+      .teacher-grid-track .card {
+        flex: 0 0 calc(50% - 15px);
+      }
+    }
+    @media (max-width: 600px) {
+      .teacher-grid-track .card {
+        flex: 0 0 calc(100% - 0px);
+      }
+    }
+
+    .teacher-controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .teacher-controls button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .teacher-controls button:hover {
+      background: var(--primary-dark);
+      transform: scale(1.03);
+    }
+    .teacher-controls button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .teacher-controls .auto-toggle {
+      background: var(--secondary);
+      color: #1e293b;
+    }
+    .teacher-controls .auto-toggle:hover {
+      background: #e0904a;
+    }
+    .teacher-controls .auto-toggle.active {
+      background: #e76f51;
+      color: white;
+    }
+
+    /* ----- TEACHER PROFILE MODAL ----- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-box {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      border-radius: 32px;
+      padding: 40px 36px;
+      position: relative;
+      box-shadow: 0 40px 60px rgba(0,0,0,0.3);
+      animation: modalFade 0.3s ease;
+    }
+    @keyframes modalFade {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #94a3b8;
+      transition: 0.2s;
+    }
+    .modal-close:hover {
+      color: #1e293b;
+      transform: rotate(90deg);
+    }
+    .modal-box .teacher-img {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 16px;
+    }
+    .modal-box h2 {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .modal-box .designation {
+      text-align: center;
+      color: var(--gray-text);
+      margin-bottom: 24px;
+    }
+    .modal-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .modal-box th, .modal-box td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .modal-box th {
+      background: var(--light-bg);
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .modal-box tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ---------- rest of existing styles ---------- */
     .notice-wrapper {
       display: flex;
       flex-wrap: wrap;
@@ -338,8 +494,6 @@
       text-align: center;
       border-radius: 20px;
     }
-
-    /* Gallery grid */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -361,8 +515,6 @@
     .gallery-item img:hover {
       transform: scale(1.05);
     }
-
-    /* contact form */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -443,42 +595,37 @@
       gap: 8px;
       text-decoration: none;
     }
-.about-image {
-  text-align: center;
-  margin: 48px 0 20px;
-}
-.about-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 28px;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease;
-}
-.about-image img:hover {
-  transform: scale(1.01);
-}
-.copyright a{
-    color:#f4a261;
-    text-decoration:none;
-    transition:all 0.3s ease;
-}
-
-.copyright a:hover{
-    color:#ffffff;
-    text-decoration:underline;
-}
+    .about-image {
+      text-align: center;
+      margin: 48px 0 20px;
+    }
+    .about-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 28px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease;
+    }
+    .about-image img:hover {
+      transform: scale(1.01);
+    }
+    .copyright a{
+      color:#f4a261;
+      text-decoration:none;
+      transition:all 0.3s ease;
+    }
+    .copyright a:hover{
+      color:#ffffff;
+      text-decoration:underline;
+    }
   </style>
 </head>
 <body>
-
-
 
 <!-- WhatsApp Floating Button -->
 <a href="https://wa.me/9779812345678" class="btn-wa" target="_blank">
   <i class="fab fa-whatsapp"></i> Admission Enquiry
 </a>
-
-
 
 <header>
   <div class="container">
@@ -501,87 +648,59 @@
   </div>
 </header>
 
-
-
 <main>
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
         <div class="hero-badge"><i class="fas fa-chalkboard-user"></i> Admission Open 2083</div>
-
-
-          <h1>Shaping Future Leaders <br> With Excellence</h1>
-        <p>Lovely Angesl School – Where Knowledge meets character. Modern pedagogy, values, and holistic development from Montessori to Grade 10.</p>
+        <h1>Shaping Future Leaders <br> With Excellence</h1>
+        <p>Lovely Angels School – Where Knowledge meets character. Modern pedagogy, values, and holistic development from Montessori to Grade 10.</p>
         <div class="hero-buttons">
           <a href="#contact" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Enquire Now</a>
           <a href="#about" class="btn btn-outline"><i class="fas fa-info-circle"></i> Learn More</a>
         </div>
       </div>
-
-
-<div class="hero-image">
-      <img src="hero1.jpg" alt="School building">
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-<!-- About Section -->
-<section id="about">
-  <div class="container">
-    <h2 class="section-title">About Our School</h2>
-    <p class="section-subtitle">Since 2053, Lovely Angels School has been a benchmark for quality education in Nepal, fostering academic brilliance and ethical values.</p>
-
-    <!-- Three cards grid -->
-    <div class="grid-3">
-      <div class="card">
-        <div class="card-icon"><i class="fas fa-eye"></i></div>
-        <h3>Our Vision</h3>
-        <p>To be a global standard institution that nurtures creative, confident, and compassionate world citizens.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon"><i class="fas fa-bullseye"></i></div>
-        <h3>Our Mission</h3>
-        <p>Empower students with 21st-century skills, moral integrity, and academic excellence through innovative learning.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
-        <h3>Core Values</h3>
-        <p>Respect, Integrity, Excellence, Innovation, and Community Service — pillars of our daily practice.</p>
+      <div class="hero-image">
+        <img src="hero1.jpg" alt="School building">
       </div>
     </div>
+  </section>
 
-    <!-- One Photo (place your image file here) -->
-    <div class="about-image">
-      <img src="school-photo.jpg" alt="Lovely Angels School Campus">
-    </div>
-
-    <!-- Quote & Principal’s Message -->
-    <div style="margin-top: 48px; text-align: center;">
-      <div class="quote" style="background: var(--light-bg); padding: 32px; border-radius: 32px;">
-        <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--secondary); opacity: 0.5;"></i>
-        <p style="font-size: 1.2rem; font-style: italic; max-width: 800px; margin: 16px auto;">"Education is the most powerful weapon which you can use to change the world." – Nelson Mandela</p>
-        <p><strong>Principal’s Message:</strong> “At Lovely Angels, we focus on every child's potential and craft an environment where curiosity thrives.” – Mr. Manoj Regmi</p>
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Our School</h2>
+      <p class="section-subtitle">Since 2053, Lovely Angels School has been a benchmark for quality education in Nepal, fostering academic brilliance and ethical values.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-eye"></i></div>
+          <h3>Our Vision</h3>
+          <p>To be a global standard institution that nurtures creative, confident, and compassionate world citizens.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>Empower students with 21st-century skills, moral integrity, and academic excellence through innovative learning.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
+          <h3>Core Values</h3>
+          <p>Respect, Integrity, Excellence, Innovation, and Community Service — pillars of our daily practice.</p>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="school-photo.jpg" alt="Lovely Angels School Campus">
+      </div>
+      <div style="margin-top: 48px; text-align: center;">
+        <div class="quote" style="background: var(--light-bg); padding: 32px; border-radius: 32px;">
+          <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--secondary); opacity: 0.5;"></i>
+          <p style="font-size: 1.2rem; font-style: italic; max-width: 800px; margin: 16px auto;">"Education is the most powerful weapon which you can use to change the world." – Nelson Mandela</p>
+          <p><strong>Principal’s Message:</strong> “At Lovely Angels, we focus on every child's potential and craft an environment where curiosity thrives.” – Mr. Manoj Regmi</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-
-
-
-
-
+  </section>
 
   <!-- Academics Section -->
   <section id="academics" style="background: var(--light-bg);">
@@ -594,21 +713,16 @@
           <h3>Opt.Maths [I]</h3>
           <p>Mathematics – state-of-the-art labs and research-oriented projects.</p>
         </div>
-
-
         <div class="card">
           <i class="fas fa-chart-line card-icon"></i>
           <h3>Economics [I] </h3>
           <p>Economics with entrepreneurial skill development.</p>
         </div>
-
-	
-	<div class="card">
+        <div class="card">
           <i class="fas fa-chart-line card-icon"></i>
           <h3>Accountancy [II] </h3>
           <p>Accountancy with entrepreneurial skill development.</p>
         </div>
-
         <div class="card">
           <i class="fas fa-laptop-code card-icon"></i>
           <h3>Computer [II] </h3>
@@ -618,71 +732,52 @@
     </div>
   </section>
 
-
-
-
-
-
- <!-- Facilities Section -->
-<section id="facilities">
-  <div class="container">
-    <h2 class="section-title">World-Class Facilities</h2>
-    <p class="section-subtitle">
-      We provide modern facilities and a supportive learning environment designed to enhance academic achievement, creativity, innovation, and overall student development.
-    </p>
-
-    <div class="grid-4">
-      <div class="card">
-        <i class="fas fa-laptop card-icon"></i>
-        <h3>Smart Classrooms</h3>
-        <p>Technology-enabled classrooms with interactive displays and digital learning resources.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-flask card-icon"></i>
-        <h3>Science Labs</h3>
-        <p>Well-equipped Physics, Chemistry, and Biology laboratories for practical learning.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-desktop card-icon"></i>
-        <h3>Computer Labs</h3>
-        <p>Modern computer laboratories supporting coding, AI, and digital literacy skills.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-book-open card-icon"></i>
-        <h3>Smart Library</h3>
-        <p>Extensive collection of books, journals, and digital learning resources.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-futbol card-icon"></i>
-        <h3>Sports Complex</h3>
-        <p>Facilities for football, volleyball, basketball, indoor games, and yoga activities.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-bus card-icon"></i>
-        <h3>Transportation</h3>
-        <p>Reliable and safe transportation services covering nearby areas.</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-shield-alt card-icon"></i>
-        <h3>24/7 Security</h3>
-        <p>Secure school with CCTV surveillance and trained security personnel.</p>
+  <!-- Facilities Section -->
+  <section id="facilities">
+    <div class="container">
+      <h2 class="section-title">World-Class Facilities</h2>
+      <p class="section-subtitle">We provide modern facilities and a supportive learning environment designed to enhance academic achievement, creativity, innovation, and overall student development.</p>
+      <div class="grid-4">
+        <div class="card">
+          <i class="fas fa-laptop card-icon"></i>
+          <h3>Smart Classrooms</h3>
+          <p>Technology-enabled classrooms with interactive displays and digital learning resources.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-flask card-icon"></i>
+          <h3>Science Labs</h3>
+          <p>Well-equipped Physics, Chemistry, and Biology laboratories for practical learning.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-desktop card-icon"></i>
+          <h3>Computer Labs</h3>
+          <p>Modern computer laboratories supporting coding, AI, and digital literacy skills.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-book-open card-icon"></i>
+          <h3>Smart Library</h3>
+          <p>Extensive collection of books, journals, and digital learning resources.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-futbol card-icon"></i>
+          <h3>Sports Complex</h3>
+          <p>Facilities for football, volleyball, basketball, indoor games, and yoga activities.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-bus card-icon"></i>
+          <h3>Transportation</h3>
+          <p>Reliable and safe transportation services covering nearby areas.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-shield-alt card-icon"></i>
+          <h3>24/7 Security</h3>
+          <p>Secure school with CCTV surveillance and trained security personnel.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-
-
-
-
-  <!-- Notice & Events Section (Together) -->
+  <!-- Notice & Events -->
   <section style="background: var(--light-bg);">
     <div class="container">
       <h2 class="section-title">Updates & Events</h2>
@@ -695,10 +790,6 @@
           <div class="notice-item"><span class="notice-date">05 Aug</span><span>📢 Parent-Teacher Meeting on 25th August (9 AM to 2 PM).</span></div>
           <div class="notice-item"><span class="notice-date">30 Jul</span><span>📢 Scholarship Examination for deserving students – 5th Sept.</span></div>
         </div>
-
-
-
-
         <div class="events-list">
           <h3><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
           <div class="event-item"><div class="event-date">Sept 15</div><div><strong>Science Exhibition</strong> – Inter-school competition</div></div>
@@ -710,61 +801,43 @@
     </div>
   </section>
 
+  <!-- ========== OUR TEACHERS (AUTO-SLIDE + MANUAL + CLICK PROFILE) ========== -->
+  <section id="teachers">
+    <div class="container">
+      <h2 class="section-title">Our Academic Team</h2>
+      <p class="section-subtitle">Experienced & dedicated mentors shaping young minds with care and expertise. <br><small style="color:var(--gray-text);">👆 Click on any teacher to see their classes & subjects</small></p>
 
-
-
-
- <!-- Our Teachers Section -->
-<section>
-  <div class="container">
-    <h2 class="section-title">Our Academic Team</h2>
-    <p class="section-subtitle">Experienced & dedicated mentors shaping young minds with care and expertise.</p>
-    <div class="grid-3">
-
-      <!-- Teacher 1 – using GitHub raw image -->
-      <div class="card teacher-card">
-        <div class="teacher-img">
-          <img src="https://raw.githubusercontent.com/your-username/your-repo/main/images/manoj-regmi.jpg" alt="Mr. Manoj Regmi">
+      <div class="teacher-grid-wrapper">
+        <div class="teacher-grid-track" id="teacherTrack">
+          <!-- teacher data will be injected by JS -->
         </div>
-        <h3>Mr. Manoj Regmi</h3>
-        <p>Principal <br>M.Ed in English | 15+ years</p> 
-        <i class="fas fa-star" style="color: #f4a261;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
       </div>
 
-
-
-    
-      <div class="card teacher-card">
-        <div class="teacher-img">
-          <img src="https://raw.githubusercontent.com/your-username/your-repo/main/images/indra.jpg" alt="Mr. Indra Adhikari">
-        </div>
-        <h3>Mr. Indra Prasad Adhikari</h3>
-        <p>Nepali Literature </p>
-        <i class="fas fa-star" style="color: #f4a261;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      <!-- Controls -->
+      <div class="teacher-controls">
+        <button id="prevTeacher" disabled><i class="fas fa-chevron-left"></i> Prev</button>
+        <button id="autoToggle" class="auto-toggle active"><i class="fas fa-play"></i> Auto</button>
+        <button id="nextTeacher">Next <i class="fas fa-chevron-right"></i></button>
       </div>
+    </div>
+  </section>
 
-
-     
-      <div class="card teacher-card">
-        <div class="teacher-img">
-          <img src="https://raw.githubusercontent.com/your-username/your-repo/main/images/amit.jpg" alt="Mr. Amit Khawas">
-        </div>
-        <h3>Mr. Amitsen Khawas</h3>
-        <p>M.Ed in English </p>
-        <i class="fas fa-star" style="color: #f4a261;"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
-
+  <!-- ========== TEACHER PROFILE MODAL ========== -->
+  <div class="modal-overlay" id="teacherModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="teacher-img" id="modalImg"><img src="" alt="Teacher"></div>
+      <h2 id="modalName">Teacher Name</h2>
+      <p class="designation" id="modalDesignation">Designation</p>
+      <table>
+        <thead><tr><th>Class</th><th>Subject</th></tr></thead>
+        <tbody id="modalTableBody">
+          <tr><td>Grade 8</td><td>English</td></tr>
+          <tr><td>Grade 9</td><td>English Literature</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</section>
-
-
-
-
-
-
-
-
 
   <!-- Gallery Section -->
   <section id="gallery" style="background: var(--light-bg);">
@@ -782,11 +855,7 @@
     </div>
   </section>
 
-
-
-
-
-  <!-- Contact Section + Map -->
+  <!-- Contact Section -->
   <section id="contact">
     <div class="container">
       <h2 class="section-title">Get in Touch</h2>
@@ -801,37 +870,19 @@
             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
           </form>
         </div>
-
-
-
-
-
         <div class="contact-info">
           <div class="info-item"><i class="fas fa-map-marker-alt" style="font-size: 1.8rem;"></i><span>Sundarharaincha-2, Morang</span></div>
           <div class="info-item"><i class="fas fa-phone-alt"></i><span>+977 9809323345</span></div>
           <div class="info-item"><i class="fas fa-envelope"></i><span>info@lovelyangelsschool.edu.np</span></div>
           <div class="info-item"><i class="fas fa-clock"></i><span>Mon - Fri: 9:30 AM – 4:00 PM </span></div>
           <div class="map">
-           <iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56592.23697181523!2d87.3378035!3d26.6288072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef6e553ea4e21f%3A0x908c4f0d19804afd!2sLovely%20Angels%20English%20School!5e0!3m2!1sen!2snp!4v1748500000000!5m1!1e1"
-  width="100%"
-  height="450"
-  style="border:0;"
-  allowfullscreen=""
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56592.23697181523!2d87.3378035!3d26.6288072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ef6e553ea4e21f%3A0x908c4f0d19804afd!2sLovely%20Angels%20English%20School!5e0!3m2!1sen!2snp!4v1748500000000!5m1!1e1" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
     </div>
   </section>
 </main>
-
-
-
-
-
 
 <footer>
   <div class="container">
@@ -840,8 +891,6 @@
         <h3 style="color: white;">Lovely Angels English Boarding School</h3>
         <p>"Education is the light through which each individuals is guided"</p>
       </div>
-
-
       <div>
         <h4>Quick Links</h4>
         <ul style="list-style: none; margin-top: 8px;">
@@ -850,9 +899,6 @@
           <li><a href="#contact" style="color:#cbd5e1; text-decoration:none;">Admission</a></li>
         </ul>
       </div>
-
-
-
       <div class="social-icons">
         <h4>Follow Us</h4>
         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -861,50 +907,380 @@
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
-
-
-  <div class="copyright">
-  <p>
-    &copy; 2026 Lovely Angels School. All Rights Reserved. |
-    Developed
-    <i class="fas fa-heart" style="color:#f4a261;"></i>
-    by
-    <a href="https://baburamphuyal.com.np" target="_blank" rel="noopener noreferrer"
-       style="color:#f4a261; text-decoration:none; font-weight:600;">
-       Brp Mailo
-    </a>
-  </p>
-</div>
-
-
-
-
+    <div class="copyright">
+      <p>
+        &copy; 2026 Lovely Angels School. All Rights Reserved. |
+        Developed
+        <i class="fas fa-heart" style="color:#f4a261;"></i>
+        by
+        <a href="https://baburamphuyal.com.np" target="_blank" rel="noopener noreferrer"
+           style="color:#f4a261; text-decoration:none; font-weight:600;">
+           Brp Mailo
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
 
 
 
 
 <script>
-  // Mobile menu toggle
+  // ======================== TEACHER DATA ========================
+  const teachers = [
+    {
+      name: "Mr. Manoj Regmi",
+      designation: "Principal | M.Ed in English",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/manoj-regmi.jpg",
+      classes: [
+        { class: "Grade 8", subject: "English" },
+        { class: "Grade 9", subject: "English Literature" },
+        { class: "Grade 10", subject: "English Grammar" }
+      ]
+    },
+    {
+      name: "Mr. Indra Prasad Adhikari",
+      designation: "Nepali Literature",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/indra.jpg",
+      classes: [
+        { class: "Grade 6", subject: "Nepali" },
+        { class: "Grade 7", subject: "Nepali" },
+        { class: "Grade 9", subject: "Nepali " },
+        { class: "Grade 10", subject: "Nepali" }
+      ]
+    },
+    {
+      name: "Mr. Amitsen Khawas",
+      designation: "M.Ed in English",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/amit.jpg",
+      classes: [
+        { class: "Grade 4", subject: "English" },
+        { class: "Grade 5", subject: "English" },
+        { class: "Grade 9", subject: "English" },
+        { class: "Grade 10", subject: "English" }
+      ]
+    },
+    {
+      name: "Mr. Prakash Khadka",
+      designation: "B.Ed in English",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/sita.jpg",
+      classes: [
+        { class: "Grade 6", subject: "English" },
+        { class: "Grade 7", subject: "English" },
+        { class: "Grade 8", subject: "English" }
+      ]
+    },
+    {
+      name: "Mr. Binod Giri",
+      designation: "MBS",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/bg.jpg",
+      classes: [
+        { class: "Grade 7", subject: "Mathematics" },
+        { class: "Grade 8", subject: "Mathematics" },
+        { class: "Grade 9", subject: "Mathematics" },
+        { class: "Grade 10", subject: "Mathematics" },
+        { class: "Grade 9", subject: "Accountancy" },
+        { class: "Grade 10", subject: "Accountancy" }
+      ]
+    },
+
+    {
+      name: "Mrs. Tamanja Niraula",
+      designation: "M.Ed in Nepali",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/tamanja.jpg",
+      classes: [
+        { class: "Grade 6", subject: "Nepali" },
+        { class: "Grade 8", subject: "Nepali" }
+      ]
+    },
+    {
+      name: "Mr. Arjun Dhungana",
+      designation: "BBS",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/ad.jpg",
+      classes: [
+        { class: "Grade 5", subject: "Mathematics" },
+        { class: "Grade 6", subject: "Mathematics" },
+        { class: "Grade 9", subject: "Economics" },
+        { class: "Grade 10", subject: "Economics" }
+      ]
+    },
+   {
+      name: "Mr. Baburam Dahal",
+      designation: "BICT",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/bd.jpg",
+      classes: [
+        { class: "Grade 4", subject: "Helath" },
+        { class: "Grade 5", subject: "Helath" },
+        { class: "Grade 6", subject: "Helath" },
+        { class: "Grade 7", subject: "Helath" },
+        { class: "Grade 7", subject: "Helath" }
+      ]
+    },
+    {
+      name: "Mr. Baburam Phuyal",
+      designation: "B.Ed",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/bd.jpg",
+      classes: [
+        { class: "Grade 7", subject: "Social Studies & Human Value" },
+        { class: "Grade 8", subject: "Social Studies & Human Value" },
+        { class: "Grade 9", subject: "Social Studies" }
+      ]
+    },
+    {
+      name: "Mr. Kuber Jung Thapa",
+      designation: "BICT",
+      img: "https://raw.githubusercontent.com/your-username/your-repo/main/images/kjt.jpg",
+      classes: [
+        { class: "Grade 4", subject: "Computer Science" },
+        { class: "Grade 5", subject: "Computer Science" },
+        { class: "Grade 6", subject: "Computer Science" },
+        { class: "Grade 7", subject: "Computer Science" },
+        { class: "Grade 8", subject: "Computer Science" }
+      ]
+    }
+  ];
+
+
+
+
+
+
+
+
+
+
+
+
+  const track = document.getElementById('teacherTrack');
+  function renderTeachers() {
+    track.innerHTML = '';
+    teachers.forEach((t, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card teacher-card';
+      card.dataset.index = idx;
+      card.innerHTML = `
+        <div class="teacher-img">
+          <img src="${t.img}" alt="${t.name}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=eef2ff&color=0f3b7a&size=128'">
+        </div>
+        <h3>${t.name}</h3>
+        <p>${t.designation}</p>
+        <i class="fas fa-star" style="color: #f4a261;"></i>
+        <i class="fas fa-star" style="color: #f4a261;"></i>
+        <i class="fas fa-star" style="color: #f4a261;"></i>
+        <i class="fas fa-star" style="color: #f4a261;"></i>
+        <i class="fas fa-star-half-alt" style="color: #f4a261;"></i>
+        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Click for details</div>
+      `;
+      card.addEventListener('click', () => openTeacherModal(idx));
+      track.appendChild(card);
+    });
+  }
+  renderTeachers();
+
+
+
+
+
+  let currentIndex = 0;
+  let visibleCount = 3;
+  let autoSlideInterval = null;
+  let isAutoPlaying = true;
+
+  function getVisibleCount() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, teachers.length - getVisibleCount());
+  }
+
+  function slideTo(index) {
+    const maxIdx = getMaxIndex();
+    if (index < 0) index = 0;
+    if (index > maxIdx) index = maxIdx;
+    currentIndex = index;
+
+    const cards = track.querySelectorAll('.card');
+    if (!cards.length) return;
+    const cardWidth = cards[0].offsetWidth || 280;
+    const gap = 30;
+    const offset = currentIndex * (cardWidth + gap);
+    track.style.transform = `translateX(-${offset}px)`;
+
+    document.getElementById('prevTeacher').disabled = (currentIndex === 0);
+    document.getElementById('nextTeacher').disabled = (currentIndex >= maxIdx);
+  }
+
+  function nextSlide() {
+    const maxIdx = getMaxIndex();
+    if (currentIndex < maxIdx) {
+      slideTo(currentIndex + 1);
+    } else {
+      slideTo(0); // loop back
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      slideTo(currentIndex - 1);
+    }
+  }
+
+
+
+
+
+
+
+  
+  function startAutoSlide() {
+    if (autoSlideInterval) clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => {
+      if (isAutoPlaying) {
+        nextSlide();
+      }
+    }, 2500); // 2.5 sec = 2/2 sec roughly
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideInterval) {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = null;
+    }
+  }
+
+
+
+  function toggleAutoPlay() {
+    isAutoPlaying = !isAutoPlaying;
+    const btn = document.getElementById('autoToggle');
+    if (isAutoPlaying) {
+      btn.innerHTML = '<i class="fas fa-play"></i> Auto';
+      btn.classList.add('active');
+      startAutoSlide();
+    } else {
+      btn.innerHTML = '<i class="fas fa-pause"></i> Paused';
+      btn.classList.remove('active');
+      stopAutoSlide();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+  const modal = document.getElementById('teacherModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalImg = document.getElementById('modalImg').querySelector('img');
+  const modalName = document.getElementById('modalName');
+  const modalDesignation = document.getElementById('modalDesignation');
+  const modalTableBody = document.getElementById('modalTableBody');
+
+  function openTeacherModal(index) {
+    const t = teachers[index];
+    if (!t) return;
+    modalImg.src = t.img;
+    modalImg.alt = t.name;
+    modalImg.onerror = function() {
+      this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=eef2ff&color=0f3b7a&size=128`;
+    };
+    modalName.textContent = t.name;
+    modalDesignation.textContent = t.designation;
+
+    modalTableBody.innerHTML = '';
+    if (t.classes && t.classes.length) {
+      t.classes.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${c.class}</td><td>${c.subject}</td>`;
+        modalTableBody.appendChild(tr);
+      });
+    } else {
+      modalTableBody.innerHTML = `<tr><td colspan="2" style="text-align:center;color:var(--gray-text);">No class data available</td></tr>`;
+    }
+
+    modal.classList.add('open');
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+
+
+
+
+
+
+  const prevBtn = document.getElementById('prevTeacher');
+  const nextBtn = document.getElementById('nextTeacher');
+  const autoBtn = document.getElementById('autoToggle');
+
+  prevBtn.addEventListener('click', () => { if (!isAutoPlaying) prevSlide(); else { stopAutoSlide(); isAutoPlaying = false; autoBtn.innerHTML = '<i class="fas fa-pause"></i> Paused'; autoBtn.classList.remove('active'); } });
+  nextBtn.addEventListener('click', () => { if (!isAutoPlaying) nextSlide(); else { stopAutoSlide(); isAutoPlaying = false; autoBtn.innerHTML = '<i class="fas fa-pause"></i> Paused'; autoBtn.classList.remove('active'); } });
+  autoBtn.addEventListener('click', toggleAutoPlay);
+
+  // Resize handler
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      slideTo(currentIndex);
+    }, 200);
+  });
+
+  // Init
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      slideTo(0);
+      startAutoSlide();
+    }, 300);
+  });
+
+
+
+
+
+
+
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-
-  // Close menu when a link is clicked
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
   document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
+    link.addEventListener('click', () => navLinks.classList.remove('active'));
   });
 
-  // Contact form submission alert
+
+
+
+
+
+
+
+
+
+
+  // Contact form
   const contactForm = document.getElementById('schoolContactForm');
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('fullname').value.trim();
     const email = document.getElementById('emailid').value.trim();
-    if(name === "" || email === "") {
+    if (name === "" || email === "") {
       alert("कृपया नाम र इमेल भर्नुहोस् | Please fill name and email.");
       return;
     }
@@ -912,13 +1288,13 @@
     contactForm.reset();
   });
 
-  // Smooth scroll for anchor links
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
-      if(href === "#" || href === "") return;
+      if (href === "#" || href === "") return;
       const target = document.querySelector(href);
-      if(target) {
+      if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
