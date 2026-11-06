@@ -1704,6 +1704,54 @@ textarea:focus-visible{
     transition-duration:0.01ms !important;
   }
 }
+/* About section photo */
+.about-photo{
+  margin:60px auto 0;
+  max-width:1000px;
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:var(--shadow-xl);
+  position:relative;
+  transition:var(--transition);
+}
+
+.about-photo:hover{
+  transform:scale(1.01);
+  box-shadow:0 50px 100px rgba(15,59,122,0.25);
+}
+
+.about-photo img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:transform 0.8s ease;
+}
+
+.about-photo:hover img{
+  transform:scale(1.05);
+}
+
+.about-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, transparent 60%, rgba(15,59,122,0.3));
+  pointer-events:none;
+}
+
+@media(max-width:768px){
+  .about-photo{
+    margin:40px auto 0;
+    border-radius:20px;
+  }
+}
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -1824,6 +1872,15 @@ textarea:focus-visible{
         <p>Respect, Integrity, Excellence, Innovation, and Community Service — pillars of our daily practice.</p>
       </div>
     </div>
+
+
+
+<div class="about-photo reveal">
+  <img src="scl-building-2.jpg" alt="Lovely Angels School">
+</div>
+
+
+
 
     <div class="quote-box reveal">
       <div class="principal-message">
